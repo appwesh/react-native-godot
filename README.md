@@ -136,13 +136,13 @@ import { RTNGodot, RTNGodotView, runOnGodotThread } from "@borndotcom/react-nati
 
 ## Add the Godot View to your view, e.g.
 
-```typescript
+```tsx
 const App = () => {
-	return (
-        <View>
-            <RTNGodotView style={...}/>
-        </View>
-	)
+  return (
+    <View>
+      <RTNGodotView style={...}/>
+    </View>
+  );
 };
 ```
 
@@ -165,22 +165,23 @@ function initGodot() {
     console.log("Initializing Godot");
 
     if (Platform.OS === 'android') {
-        RTNGodot.createInstance(
-            ["--verbose", "--path",
-            "/main",
-            "--rendering-driver", "opengl3",
-            "--rendering-method", "gl_compatibility",
-            "--display-driver", "embedded"]
-        );  
+      RTNGodot.createInstance([
+        "--verbose",
+        "--path", "/main",
+        "--rendering-driver", "opengl3",
+        "--rendering-method", "gl_compatibility",
+        "--display-driver", "embedded"
+      ]);  
     } else {
-        RTNGodot.createInstance(
-            ["--verbose", "--main-pack",
-            FileSystem.bundleDirectory + "main.pck",
-            "--rendering-driver", "opengl3",
-            "--rendering-method", "gl_compatibility",
-            "--display-driver", "embedded"]
-        );  
+      RTNGodot.createInstance([
+        "--verbose",
+        "--main-pack", FileSystem.bundleDirectory + "main.pck",
+        "--rendering-driver", "opengl3",
+        "--rendering-method", "gl_compatibility",
+        "--display-driver", "embedded"
+      ]);  
     }
+  }
 }
 ```
 A couple of things to note here:
@@ -197,19 +198,18 @@ A couple of things to note here:
 
 ## Add the Godot initialization to the App component
 
-```typescript
+```tsx
 const App = () => {
-    useEffect(() => {
-      initGodot()
-      return () => {
-      }
-    }, [])
+  useEffect(() => {
+    initGodot()
+    return () => {};
+  }, []);
 
-    return (
-        <View>
-            <RTNGodotView style={...}/>
-        </View>
-	)
+  return (
+    <View>
+      <RTNGodotView style={...}/>
+    </View>
+  );
 };
 ```
 
@@ -351,18 +351,17 @@ class_name RNInterface
 
 func test_callable(c: Callable) -> void:
 	c.call("Hello from Godot")
-
 ```
 
 From TypeScript we may access it with the following code snippet:
 
 ```typescript
-let Godot = RTNGodot.API();
-var engine = Godot.Engine;
-var sceneTree = engine.get_main_loop();
-var root = sceneTree.get_root();
+const Godot = RTNGodot.API();
+const engine = Godot.Engine;
+const sceneTree = engine.get_main_loop();
+const root = sceneTree.get_root();
 
-var iface = root.find_child("RNInterface", true, false)
+const iface = root.find_child("RNInterface", true, false);
 
 iface.test_callable(function(s: string) {
   console.log("Received text from Godot: " + s)
@@ -379,7 +378,7 @@ Worklets are JavaScript functions designated with a 'worklet' keyword.
 
 ```typescript
 function worklet() {
-    'worklet'
+  'worklet'
 }
 ```
 
