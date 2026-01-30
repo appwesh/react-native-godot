@@ -34,5 +34,11 @@ Pod::Spec.new do |s|
   s.source_files    = ["ios/**/*.{h,hpp,cpp,m,mm,swift}"]
   s.header_mappings_dir = 'ios'
 
+  # Fix: Add header search paths for react-native-worklets-core headers
+  # See: https://github.com/borndotcom/react-native-godot/issues/28
+  s.pod_target_xcconfig = {
+    "HEADER_SEARCH_PATHS" => "$(inherited) \"${PODS_ROOT}/../node_modules/react-native-worklets-core/cpp\""
+  }
+
   install_modules_dependencies(s)
 end
