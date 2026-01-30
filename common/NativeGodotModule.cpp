@@ -41,8 +41,10 @@
 #include <fbjni/fbjni.h>
 #endif
 
-#include <react-native-worklets-core/WKTJsiWorklet.h>
-#include <react-native-worklets-core/WKTJsiWorkletContext.h>
+// Fixed include paths - direct includes work with HEADER_SEARCH_PATHS
+// pointing to node_modules/react-native-worklets-core/cpp
+#include <WKTJsiWorklet.h>
+#include <WKTJsiWorkletContext.h>
 
 #define NATIVE_GODOT_MODULE_PROPERTY "RTNGodot"
 
